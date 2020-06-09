@@ -1,0 +1,85 @@
+% DOCUMENT FORMATING
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% PACKAGES
+\usepackage{amsmath} % For extended formatting
+\usepackage{amssymb} % For math symbols
+\usepackage{amsthm} % For proof environment
+\usepackage{array} % For tables
+\usepackage{enumerate} % For lists
+\usepackage{extramarks} % For headers and footers
+\usepackage{blindtext}
+\usepackage{fancyhdr} % For custom headers
+\usepackage{graphicx} % For inserting images
+\usepackage{multicol} % For multiple columns
+\usepackage{verbatim} % For displaying code
+\usepackage{tkz-euclide}
+\usepackage{pgfplots}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+% SET UP HEADER AND FOOTER
+\pagestyle{fancy}
+\lhead{\MyCourse} % Top left header
+\chead{\MyTopicTitle} % Top center header
+\rhead{\MyAssignment} % Top right header
+\lfoot{\MyCampus} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{\MySemester} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+% ----------
+% TITLES AND NAMES 
+% ----------
+
+\newcommand{\MyCourse}{ICS 311}
+\newcommand{\MyTopicTitle}{TOPIC 2,3,4}
+\newcommand{\MyAssignment}{Algorithms}
+\newcommand{\MySemester}{Fall 2020}
+\newcommand{\MyCampus}{University of Hawaii at Manoa}
+\begin{document}
+\subsection*{Problem 1. Proofs of Asymptotic Bound}
+\begin{itemize}
+    \item[(a)]
+    \begin{center}
+    \begin{tabular} {|c|c|c|c|c|c|c|}
+    f(n) & g(n) & O & o & $\Omega$ & $\omega$ & $\theta$ \\ 
+    $4n^2$ & $4^{\lg n}$ & Y & N & Y & N & Y 
+    \end{tabular}
+\end{center}
+\textbf{Proof}
+Given that f(n) = $4n^2$ and g(n) = $4^{\lg n}$ from log properties we know that $\lg n = \log_{2} n$ and from that we can rewrite from the logarithmic properties such that $4^{\log_2 n} = n^{\log_2 4}$. Furthermore, since $\log_2 4 = 2$ then it can be rewritten $n^{\log_2 4} = n^2$ = g(n). \\
+From definition of $\theta$, let $c_1, c_2, n_0 \in \mathbb{Z^{+}}$ such that $\forall n  \geq n_0$ then $\theta(g(n)) = \{f(n) : 0 \leq c_1 g(n) \leq f(n) \leq c_2 g(n)\}$. Suppose $c_1 = c_2 = 4$ then the statement therefore, so this is true for $\theta$ growth. Furthermore, from Theorem 3.1 we know that if $f(n) = \theta(g(n))$ iff $f(n) = O(g(n))$ and $f(n) = \Omega(g(n))$ and since this is an iff theorem then it goes both ways. Therefore, O and $\Omega$ holds true. \\
+However, this fails o and $\omega$ growth because it does not meet the definitions. Suppose for the sake of contradiction that little o and little omega is true. \\
+By taking the limit to the infinity of $\frac{f(n)}{g(n)}$ 
+\begin{equation*}
+    \lim_{n \to \infty} \frac{f(n)}{g(n)} = \lim_{n \to \infty} \frac{4n^2}{n^2} = 4 \neq 0 \neq \infty
+\end{equation*}
+Therefore, fails o and $\omega$. 
+\item[(b)] 
+ \begin{center}
+    \begin{tabular} {|c|c|c|c|c|c|c|}
+    f(n) & g(n) & O & o & $\Omega$ & $\omega$ & $\theta$ \\ 
+    $2^{\lg n}$ & $\lg^2 n$ & N & N & Y & Y & N
+    \end{tabular}
+    \end{center}
+\textbf{Proof} Given that f(n) = $2^{\lg n}$ and g(n) = $\lg^2 n$. From the logarithmic properties f(n) can be rewritten since $\lg n = \log_2 n $ and further $2^{\log_2 n} = n^{\log_2 2} = n^{1} = n$. \\
+From definition of $\theta$, let $c_1, c_2, n_0 \in \mathbb{Z^{+}}$ such that $\forall n  \geq n_0$ then $\theta(g(n)) = \{f(n) : 0 \leq c_1 g(n) \leq f(n) \leq c_2 g(n)\}$. This fails the right side of inequality $f(n) \leq c_2 g(n)$ as in the real number system $\lg^2 n$ will not exceed n therefore it is not $\theta $ growth and not O or o growth. \\
+However, since n will exceed $c_1\lg^2 n $ for any positive constant $c_1$ then this will be $\Omega$ growth and furthermore since 
+\begin{equation*}
+     \lim_{n \to \infty} \frac{f(n)}{g(n)} = \lim_{n \to \infty} \frac{n}{\lg^2 n} = \infty
+\end{equation*}
+from the definition of horizontal asymptote then this meets $\omega$ growth.  
+\item[(c)] 
+ \begin{center}
+    \begin{tabular} {|c|c|c|c|c|c|c|}
+    f(n) & g(n) & O & o & $\Omega$ & $\omega$ & $\theta$ \\ 
+    $\sqrt{n}$ & $ n^{\sin(n)}$ & N & N & N & N & N
+    \end{tabular}
+    \end{center}
+    \textbf{Proof} Given that f(n) = $\sqrt{n}$ and g(n) = $n^{\sin(n)}$. From exponential rules then $f(n) = \sqrt{n} = n^{\frac{1}{2}}$. Furthermore, since $\sin(n)$ has a range between $-1 \geq \sin(n) \geq 1$ then it follows that $n^{\sin(n)}$ will oscillate between $\frac{1}{n} \leq n^{\sin(n)} \leq n$. 
+\end{itemize}
+\clearpage
